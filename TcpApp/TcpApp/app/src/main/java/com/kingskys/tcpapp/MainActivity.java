@@ -77,7 +77,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // 创建tcp
     private TcpWrapper createTcp() {
-        TcpWrapper tcpWrapper = new TcpWrapper("192.168.31.123", 11001, useBase64, true);
+//        String host = "192.168.31.123"; // 要用自己的服务器的地址
+        String host = "192.168.31.33"; // 要用自己的服务器的地址
+        TcpWrapper tcpWrapper = new TcpWrapper(host, 11001, useBase64, true);
         tcpWrapper.setListener(new TcpWrapperListener() {
             @Override
             public void onReceivedNormal(byte[] data, int length) {
