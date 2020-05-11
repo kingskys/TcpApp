@@ -3,6 +3,22 @@ Android Tcp 封装
 
 # gradle 引用tcp模块
 implementation 'com.github.kingskys:TcpApp:v1.1.1'
+<pre>
+allprojects {
+    repositories {
+        ...
+        
+        maven { url "https://jitpack.io" }
+    }
+}
+
+dependencies {
+    ...
+
+    implementation 'com.github.kingskys:TcpApp:v1.1.1'
+}
+</pre>
+
 
 <h1>TcpClient数据格式</h1>
 
