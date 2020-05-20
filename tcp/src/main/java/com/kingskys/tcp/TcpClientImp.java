@@ -135,7 +135,8 @@ public class TcpClientImp {
     // length 返回解析到的数据体长度
     private boolean readHead(byte[] buf, int dataLen, Value<Integer> length) {
         try {
-            int len = m_inputStream.read(buf, 0, dataLen);
+//            int len = m_inputStream.read(buf, 0, dataLen);
+            int len = read(buf, 0, dataLen);
             if (len < 0) {
                 log("收到数据头长度错误 len = " + len + "，与服务器断开了连接");
                 return false;
@@ -143,7 +144,7 @@ public class TcpClientImp {
                 log("收到数据头非法 len = " + len + ", 应为：" + dataLen);
                 return false;
             } else {
-                log("收到数据头长度 len = " + len);
+//                log("收到数据头长度 len = " + len);
                 if (matchHead(buf, length)) {
                     return true;
                 }
@@ -180,7 +181,7 @@ public class TcpClientImp {
                 log("缓存数据不足，继续读取 本次读取：" + len + ", 本次需要：" + dataLen + "，之前读取：" + off);
                 return readBody(buf, off + len, dataLen - len);
             } else if (len == dataLen) {
-                log("读取完成，最后读取长度 len = " + len);
+//                log("读取完成，最后读取长度 len = " + len);
                 return true;
             } else {
                 log("读取缓存系统异常 本次读取：" + len + ", 需要读取：" + dataLen);
@@ -241,11 +242,11 @@ public class TcpClientImp {
                     break;
                 }
 
-                log("数据体长度为：" + len.get());
+//                log("数据体长度为：" + len.get());
 
                 if (len.get() == 0) {
                     // 空的数据，不做处理
-                    log("空的数据");
+//                    log("空的数据");
                 } else if (len.get() > 0) { // 获取到正确的数据长度
                     byte[] buf = new byte[len.get()];
                     if (readBody(buf, len.get())) {
@@ -270,8 +271,8 @@ public class TcpClientImp {
     }
 
     private void onReceivedData(byte[] data) {
-        log("onReceivedData - len = " + data.length);
-        log("data - " + data);
+//        log("onReceivedData - len = " + data.length);
+//        log("data - " + data);
         if (m_listener != null) {
             m_listener.onReceived(data, data.length);
         }

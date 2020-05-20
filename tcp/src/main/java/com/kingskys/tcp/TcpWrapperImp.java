@@ -56,20 +56,21 @@ public class TcpWrapperImp {
         byte type = data[0];
         switch (type) {
             case Type_MSG_Null: {
+                log("请设置消息类型");
                 break;
             }
             case Type_MSG_Normal: {
-                log("收到普通的消息类型");
+//                log("收到普通的消息类型");
                 processNormalMsg(data);
                 break;
             }
             case Type_MSG_Json: {
-                log("收到json的消息类型");
+//                log("收到json的消息类型");
                 processJsonMsg(data);
                 break;
             }
             case Type_MSG_File: {
-                log("收到文件的消息类型");
+//                log("收到文件的消息类型");
                 processFileMsg(data);
                 break;
             }
@@ -80,7 +81,7 @@ public class TcpWrapperImp {
     }
 
     private void processNormalMsg(byte[] data) {
-        log("收到普通数据长度为：" + data.length);
+//        log("收到普通数据长度为：" + data.length);
         if (data.length < 1) {
             return;
         }
@@ -94,7 +95,7 @@ public class TcpWrapperImp {
     }
 
     private void processJsonMsg(byte[] data) {
-        log("收到json数据长度为：" + data.length);
+//        log("收到json数据长度为：" + data.length);
         if (data.length < 1) {
             return;
         }
@@ -108,7 +109,7 @@ public class TcpWrapperImp {
     }
 
     private void processFileMsg(byte[] data) {
-        log("收到文件数据长度：" + data.length);
+//        log("收到文件数据长度：" + data.length);
         if (data.length < 5) {
             return;
         }
@@ -119,16 +120,14 @@ public class TcpWrapperImp {
                 log("文件名长度异常 长度：" + nameLen);
                 return;
             }
-            log("文件名 长度：" + nameLen);
+//            log("文件名 长度：" + nameLen);
             byte[] nameBytes = new byte[nameLen];
             System.arraycopy(data, 5, nameBytes, 0, nameLen);
             String fileName = new String(nameBytes);
-            log("文件名：" + fileName);
+//            log("文件名：" + fileName);
 
             int bodyLen = data.length - 5 - nameLen;
-            log("文件内容大小：" + bodyLen);
-//            byte[] bodyData = new byte[bodyLen];
-//            System.arraycopy(data, 5 + nameLen, bodyData, 0, bodyLen);
+//            log("文件内容大小：" + bodyLen);
             m_listener.onReceivedFile(fileName, data, 5 + nameLen, bodyLen);
         }
     }
