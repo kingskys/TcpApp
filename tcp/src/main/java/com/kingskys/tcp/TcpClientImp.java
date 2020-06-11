@@ -67,10 +67,8 @@ public class TcpClientImp {
             m_inputStream = m_socket.getInputStream();
             m_outputStream = m_socket.getOutputStream();
             receiveData();
+            onConnected();
 
-            if (m_listener != null) {
-                m_listener.onConnected();
-            }
             return true;
         } catch (Throwable e) {
             log("连接服务器失败：" + e);
@@ -270,18 +268,39 @@ public class TcpClientImp {
         onDisconnected();
     }
 
-    private void onReceivedData(byte[] data) {
+    private void onReceivedData(final byte[] data) {
 //        log("onReceivedData - len = " + data.length);
 //        log("data - " + data);
         if (m_listener != null) {
-            m_listener.onReceived(data, data.length);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    m_listener.onReceived(data, data.length);
+                }
+            }).start();
         }
     }
 
     private void onDisconnected() {
         disConnect();
         if (m_listener != null) {
-            m_listener.onDisconnected();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    m_listener.onDisconnected();
+                }
+            }).start();
+        }
+    }
+
+    private void onConnected() {
+        if (m_listener != null) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    m_listener.onConnected();
+                }
+            }).start();
         }
     }
 
