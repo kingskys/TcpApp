@@ -10,7 +10,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-public class TcpClientImp {
+class TcpClientImp {
     private String m_host = "";
     private int m_port = 0;
 
@@ -36,22 +36,22 @@ public class TcpClientImp {
         i_patternR[2] = 'g';
     }
 
-    public TcpClientImp(String host, int port) {
+    TcpClientImp(String host, int port) {
         m_host = host;
         m_port = port;
     }
 
     // 设置使用大端模式
-    public void setBigEndian(boolean b) {
+    void setBigEndian(boolean b) {
         m_bigEndian = b;
     }
 
     // 返回是否使用大端模式
-    public boolean isBigEndian() {
+    boolean isBigEndian() {
         return m_bigEndian;
     }
 
-    public boolean connect() {
+    boolean connect() {
         if (isConnected()) {
             return true;
         }
@@ -74,11 +74,11 @@ public class TcpClientImp {
         }
     }
 
-    public boolean isConnected() {
+    boolean isConnected() {
         return m_socket != null && m_socket.isConnected();
     }
 
-    public synchronized void disConnect() {
+    synchronized void disConnect() {
         _onDisconnected();
     }
 
@@ -87,19 +87,19 @@ public class TcpClientImp {
             if (m_outputStream != null) {
                 m_outputStream.close();
             }
-        } catch (Throwable e) {}
+        } catch (Throwable ignored) {}
 
         try {
             if (m_inputStream != null) {
                 m_inputStream.close();
             }
-        } catch (Throwable e) {}
+        } catch (Throwable ignored) {}
 
         try {
             if (m_socket != null) {
                 m_socket.close();
             }
-        } catch (Throwable e) {}
+        } catch (Throwable ignored) {}
 
         m_outputStream = null;
         m_inputStream = null;
@@ -342,7 +342,7 @@ public class TcpClientImp {
         m_outputStream.flush();
     }
 
-    void writeHead(int len) throws Throwable {
+    private void writeHead(int len) throws Throwable {
         try {
             // 数据头左标记
             for (byte b : i_patternL) {
@@ -365,12 +365,11 @@ public class TcpClientImp {
         }
     }
 
-    void writeBody(byte[] data) throws Throwable {
+    private void writeBody(byte[] data) throws Throwable {
         try {
             // 数据体
-            int len = data.length;
-            for (int i = 0 ; i < len ; i++) {
-                m_outputStream.write(data[i]);
+            for (byte b : data) {
+                m_outputStream.write(b);
             }
         } catch (Throwable e) {
             throw e;

@@ -6,7 +6,7 @@ import com.kingskys.tcp.listener.TcpWrapperListener;
 import static com.kingskys.tcp.TcpTools.encodeBase64;
 import static com.kingskys.tcp.TcpTools.joinBytes;
 
-public class TcpWrapperImp {
+class TcpWrapperImp {
 
     private static final byte Type_MSG_Null = 0;
     private static final byte Type_MSG_Normal = 1;

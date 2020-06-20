@@ -1,6 +1,6 @@
 package com.kingskys.tcp;
 
-public class TcpToolsImp {
+class TcpToolsImp {
 
     static byte int2byte(int v, int off) {
         return (byte) ((v >> (off*8)) & 0xFF);
