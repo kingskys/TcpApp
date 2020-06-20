@@ -2,8 +2,6 @@ package com.kingskys.tcp;
 
 import com.kingskys.tcp.listener.TcpWrapperListener;
 
-import static com.kingskys.tcp.TcpTools.joinBytes;
-
 public class TcpWrapper {
 
     private TcpWrapperImp imp = null;

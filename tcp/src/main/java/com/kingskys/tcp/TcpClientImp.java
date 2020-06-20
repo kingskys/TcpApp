@@ -1,7 +1,5 @@
 package com.kingskys.tcp;
 
-import android.util.Log;
-
 import com.kingskys.tcp.common.Value;
 import com.kingskys.tcp.listener.TcpClientListener;
 
@@ -398,7 +396,7 @@ public class TcpClientImp {
     }
 
     private static void log(String msg) {
-        Log.w("tcp", msg);
+        Const.log("TcpClient", msg);
     }
 
 }

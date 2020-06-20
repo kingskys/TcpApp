@@ -1,7 +1,5 @@
 package com.kingskys.tcp;
 
-import android.util.Log;
-
 import com.kingskys.tcp.listener.TcpClientListener;
 import com.kingskys.tcp.listener.TcpWrapperListener;
 
@@ -188,6 +186,6 @@ public class TcpWrapperImp {
     }
 
     private static void log(String msg) {
-        Log.w("tcp-wrapper", msg);
+        Const.log("TcpWrapper", msg);
     }
 }
