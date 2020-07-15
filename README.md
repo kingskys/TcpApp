@@ -14,7 +14,7 @@ allprojects {
 dependencies {
     ...
 
-    implementation 'com.github.kingskys:TcpApp:v1.1.5'
+    implementation 'com.github.kingskys:TcpApp:v1.1.7'
 }
 </pre>
 
