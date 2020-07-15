@@ -9,6 +9,14 @@ public class TcpClient {
         imp = new TcpClientImp(host, port);
     }
 
+    public String getHost() {
+        return imp.getHost();
+    }
+
+    public int getPort() {
+        return imp.getPort();
+    }
+
     // 设置使用大端模式，默认是大端模式
     public void setBigEndian(boolean b) {
         imp.setBigEndian(b);

@@ -41,6 +41,14 @@ class TcpClientImp {
         m_port = port;
     }
 
+    String getHost() {
+        return m_host;
+    }
+
+    int getPort() {
+        return m_port;
+    }
+
     // 设置使用大端模式
     void setBigEndian(boolean b) {
         m_bigEndian = b;
